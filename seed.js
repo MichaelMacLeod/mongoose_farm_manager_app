@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/farm-manager');
+mongoose.connect('mongodb://localhost:27019/farm-manager');
 
 var Animal = require('./models/animal');
 var Farm   = require('./models/farm');

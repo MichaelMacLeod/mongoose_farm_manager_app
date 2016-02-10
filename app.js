@@ -21,8 +21,21 @@ app.use(expressLayouts);
 //Serve js & css files from a public folder
 app.use(express.static(__dirname + '/public'));
 
-//Let's add all the farms.locals here**********
+//Let's get all the farms 
+Farm.find(function(err, farms) {
+  if(err) console.log(err)
+  app.locals.farms = farms;
+})
+
+
 // ############ YOU CAN ADD YOUR ROUTES BELOW HERE
+app.get("/", function(req, res){
+  // INDEX
+  Animal.find(function(err, animals) {
+    if(err) console.log(err)
+    res.render('index', { animals: animals });
+  })
+});
 
 
 

@@ -58,7 +58,17 @@ app.post("/", function(req, res){
         })       
      })
    })
+});
+
+app.get("/:id", function(req, res){
+  //SHOW
+
+  Animal.findById(req.params.id, function(err, animal){
+    if(err) console.log(err);
+    res.render('show', { animal: animal })    
+  })
 })
+
 
 
 

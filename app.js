@@ -69,6 +69,28 @@ app.get("/:id", function(req, res){
   })
 })
 
+//EDIT=========
+
+app.get("/:id/edit", function(req, res){
+  //EDIT
+  Animal.findById(req.params.id, function(err, animal){
+    if(err) console.log(err);
+    res.render('edit', { animal: animal })    
+  })
+})
+
+//
+app.post('/:id', function(req, res){
+  //UPDATE
+
+  req.body.vetReport = { health:req.body.health, outlook:req.body.outlook };
+  Animal.findByIdAndUpdate(req.body._id, req.body, function(err, animal){
+    if(err) console.log(err);
+
+    res.redirect("/");
+  })
+})
+
 
 
 

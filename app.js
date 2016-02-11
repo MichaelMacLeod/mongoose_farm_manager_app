@@ -37,6 +37,30 @@ app.get("/", function(req, res){
   })
 });
 
+//-------------------POST/CREATE: 
+
+app.post("/", function(req, res){
+  //CREATE
+   var newAnimal = new Animal(req.body);
+   newAnimal.vetReport = {health: req.body.health, outlook: req.body.outlook};
+
+   newAnimal.save(function(err, animal){
+     if(err) console.log(err);
+     console.log("New animal created");
+
+     //Add it to the selected farm
+     Farm.findById(req.body.farm_id, function(err, farm){
+        if(err) console.log(err);
+        farm.addAnimal(animal);
+        farm.save(function(err){
+          if(err) console.log(err);
+          res.redirect("/");
+        })       
+     })
+   })
+})
+
+
 
 
 

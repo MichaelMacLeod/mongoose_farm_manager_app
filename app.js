@@ -91,6 +91,16 @@ app.post('/:id', function(req, res){
   })
 })
 
+app.post('/:id/delete', function(req, res){
+  //DELETE
+  console.log(req.params.id);
+  Animal.findByIdAndRemove(req.params.id, function(err) {
+    if (err) console.log(err);
+
+    console.log('Animal deleted!');
+    res.redirect("/");
+  });
+})
 
 
 
